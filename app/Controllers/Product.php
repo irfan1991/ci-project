@@ -76,10 +76,10 @@ class Product extends Controller
         $photo = $this->request->getFile('photo');
         $cek = $model->where('product_id',$id)->first();
        if ($photo != NULL) {
-          delete_files(ROOTPATH.'public/uploads/'.$cek["file"]);
-          $getPhoto =   $photo->move(ROOTPATH.'public/uploads');
+          unlink(ROOTPATH.'public/uploads/'.$cek["photo"]);
+          $photo->move(ROOTPATH.'public/uploads');
+          $getPhoto = $photo->getName();
        } else {
-        
           $getPhoto = $cek["photo"];
        }
        
@@ -104,6 +104,10 @@ class Product extends Controller
     public function delete($id)
     {
         $model =  new Product_model();
+        $cek = $model->where('product_id',$id)->first();
+        if ($cek["photo"] !== NULL || $cek["photo"] !== " ") {
+            unlink(ROOTPATH.'public/uploads/'.$cek["photo"]);
+        }
         $model->deleteProduct($id);
         return redirect()->to('/product');
     }

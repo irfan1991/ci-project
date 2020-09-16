@@ -33,4 +33,18 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+
+	public $category = [	
+		'category_name' => 'required',
+		'category_status' => 'required'
+	];
+
+	public $category_errors = [
+		'category_name' => [
+			'required' => 'Nama wajib diisi.'
+		],
+		'category_status' => [
+			'required' => 'Status wajib diisi.'
+		]
+	];
 }

@@ -3,7 +3,7 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 class category_model extends Model {
-    protected $table = "category";
+    protected $table = "categories";
     
     public function getCategory($id = false)
     {

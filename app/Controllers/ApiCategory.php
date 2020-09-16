@@ -1,0 +1,108 @@
+<?php 
+namespace App\Controllers;
+use CodeIgniter\RESTful\ResourceController;
+
+class ApiCategory extends ResourceController
+{
+    protected $format = 'json';
+    protected $modelName = 'App\Models\Category_model';
+
+    public function index()
+    {
+        return $this->respond($this->model->findAll(), 200);
+    }
+
+    public function create()
+    {
+        $validation = \Config\Services::validation();
+        $name = $this->request->getPost('category_name');
+        $status = $this->request->getPost('category_status');
+        $data = [
+            'category_name' => $name,
+            'category_status' => $status
+        ];
+        if ($validation->run($data, 'category') == FALSE) {
+            $response = [
+                'status' => 500,
+                'error' => true,
+                'data' => $validation->getErrors(),
+            ];
+            return $this->respond($response, 500);
+
+        } else {
+            $simpan = $this->model->saveCategory($data);
+            if ($simpan) {
+                $msg = ["message" => "Berhasil disimpan"];
+                $response = [
+                    'status' => 200,
+                    'error' => false,
+                    'data' => $msg
+                ];
+                return $this->respond($response, 200);
+            }
+            
+        }
+        
+    }
+
+
+    public function show($id = NULL)
+    {
+        $get = $this->model->getCategory($id)->getRowArray();
+        if ($get) {
+            $code = 200;
+            $response = [
+                'status' => $code ,
+                'error' => false,
+                'data' => $get
+            ];
+        } else {
+            $code = 401;
+            $response = [
+                'status' => $code ,
+                'error' => true,
+                'data' => ['message' => 'Not Found']
+            ];
+        }
+        return $this->respond($response, $code);
+    }
+
+    public function edit($id = NULL)
+    {
+        $get = $this->model->getCategory($id)->getRowArray();
+        var_dump($get);die();
+        if ($get) {
+            $code = 200;
+            $response = [
+                'status' => $code ,
+                'error' => false,
+                'data' => $get
+            ];
+        } else {
+            $code = 401;
+            $response = [
+                'status' => $code ,
+                'error' => true,
+                'data' => ['message' => 'Not Found']
+            ];
+        }
+        return $this->respond($response, $code);
+    }
+
+
+   
+
+//     public function update()
+//     {
+//         # code...
+//     }
+
+
+//     public function delete()
+//     {
+//         # code...
+//     }
+}
+
+
+?>

@@ -21,7 +21,8 @@
     <br />
 
     <label for="photo">Masukkan Photo Produk</label>
-    <input type="file" name="photo" id="photo"> 
+    <input type="file" name="photo" id="photo" onchange="ValidateSingleInput(this);"> <br />
+    <p>Tipe file dapat berupa :jpg/png/jpeg/PNG</p>
     <br />
 
     <label for="product_category">Kategori : </label>
@@ -39,5 +40,33 @@
     
     <button type="submit">Save</button>
     </form>
+
+    <script>
+    var _validFileExtentions = [".PNG",".png",".jpg",".jpeg"];
+    function ValidateSingleInput(params) {
+        if (params.type == "file") {
+            var sFileName = params.value;
+            if (sFileName.length > 0) {
+                var blnValid = false;
+                for (let index = 0; index < _validFileExtentions.length; index++) {
+                    const element = _validFileExtentions[index];
+                    if (sFileName.substr(sFileName.length - element.length , element.length).toLowerCase() 
+                    ==  element.toLowerCase()) 
+                    {
+                        blnValid = true;
+                        break;    
+                    }
+                }
+            }
+
+            if (!blnValid) {
+                alert("Maaf, "+ sFileName + " invalid, Sistem hanya meneria extensi : "+ 
+                _validFileExtentions.join(", "));
+                params.value = "";
+                return false;
+            }
+        }
+    }
+    </script>
 </body>
 </html>

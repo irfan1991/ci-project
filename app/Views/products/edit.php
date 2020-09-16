@@ -17,11 +17,12 @@
     <br />
 
     <label for="product_stock">Stock : </label>
-    <input type="number" name="product_stock" id="product_stock" placeholder="Masukkan Stock Produk" value="<?php echo $product->product_stock?>"" /> 
+    <input type="number" name="product_stock" id="product_stock" placeholder="Masukkan Stock Produk" value="<?php echo $product->product_stock?>" /> 
     <br />
 
     <label for="photo">Masukkan Photo Produk</label>
-    <input type="file" name="photo" id="photo"> 
+    <input type="file" name="photo" id="photo" onchange="ValidateSingleInput(this);"> <br />
+    <img src="<?php echo base_url()."/uploads/".$product->photo; ?>" alt="" width="70px" height="70px">
     <br />
 
     <label for="product_category">Kategori : </label>
@@ -39,5 +40,33 @@
     <input type="hidden" name="product_id" value="<?php echo $product->product_id?>">
     <button type="submit">Save</button>
     </form>
+
+    <script>
+    var _validFileExtentions = [".PNG",".png",".jpg",".jpeg"];
+    function ValidateSingleInput(params) {
+        if (params.type == "file") {
+            var sFileName = params.value;
+            if (sFileName.length > 0) {
+                var blnValid = false;
+                for (let index = 0; index < _validFileExtentions.length; index++) {
+                    const element = _validFileExtentions[index];
+                    if (sFileName.substr(sFileName.length - element.length , element.length).toLowerCase() 
+                    ==  element.toLowerCase()) 
+                    {
+                        blnValid = true;
+                        break;    
+                    }
+                }
+            } 
+
+            if (!blnValid) {
+                alert("Maaf, "+ sFileName + " invalid, Sistem hanya meneria extensi : "+ 
+                _validFileExtentions.join(", "));
+                params.value = "";
+                return false;
+            }
+        }
+    }
+    </script>
 </body>
 </html>
