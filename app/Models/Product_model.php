@@ -11,11 +11,11 @@ class Product_model extends Model {
     {
         if ($id === false) {
             return $this->db->table($this->table." a ")
-            ->select(' a.* , b.category_name')->join('category b ','a.product_category=b.id','left')
+            ->select(' a.* , b.category_name')->join('categories b ','a.product_category=b.id','left')
             ->get()->getResultArray();
         } else {
             return$this->db->table($this->table." a ")
-            ->select(' a.* , b.category_name, b.id')->join('category b ','a.product_category=b.id','left')
+            ->select(' a.* , b.category_name, b.id')->join('categories b ','a.product_category=b.id','left')
             ->getWhere(['a.product_id' => $id]);
         }
         

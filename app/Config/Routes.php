@@ -31,7 +31,12 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Hello::index');
+// $routes->group('api', function($routes)
+// {
+//     $routes->resource('users');
+// });
 $routes->resource('apicategory');
+$routes->resource('apiproduct');
 
 /**
  * --------------------------------------------------------------------

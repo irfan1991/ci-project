@@ -92,16 +92,67 @@ class ApiCategory extends ResourceController
 
    
 
-//     public function update()
-//     {
-//         # code...
-//     }
+    public function update($id = NULL)
+    {
+        $validation = \Config\Services::validation();
+        // $name = $this->request->getRawInput('category_name');
+        // $status = $this->request->getRawInput('category_status');
+        // $data = [
+        //     'category_name' => $name,
+        //     'category_status' => $status
+        // ];
+        $data = $this->request->getRawInput();
+        if ($validation->run($data, 'category') == FALSE) {
+            
+            $response = [
+                'status' => 500,
+                'error' => true,
+                'data' => $validation->getErrors()
+            ];
+            return $this->respond($response,500);
+        } else {
+            $simpan = $this->model->updateCategory($data, $id);
+            if ($simpan) {
+                $msg = ['message' => 'Data berhasil diupdate'];
+                $response = [
+                    'status' => 200,
+                    'error' => false,
+                    'data' => $msg
+                ];
+                return $this->respond($response, 200);
+            }
+
+        }
+        
+
+    }
 
 
-//     public function delete()
-//     {
-//         # code...
-//     }
+    public function delete($id = NULL)
+    {
+        $hapus = $this->model->deleteCategory($id);
+        if ($hapus) {
+            $code = 200;
+            $msg = ['message' => 'Deleted category successfully'];
+            $response = [
+                'status' => $code,
+                'error' => false,
+                'data' => $msg
+            ];
+        } else {
+            $code = 401;
+            $msg = ['message' => 'Not Found'];
+            $response = [
+                'status' => $code,
+                'error' => true,
+                'data' => $msg
+            ];
+         
+        }
+        return $this->respond($response);
+    }
+
+
 }
 
 

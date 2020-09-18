@@ -41,7 +41,7 @@
     <button type="submit">Save</button>
     </form>
 
-    <script>
+   <script>
     var _validFileExtentions = [".PNG",".png",".jpg",".jpeg"];
     function ValidateSingleInput(params) {
         if (params.type == "file") {
@@ -57,7 +57,7 @@
                         break;    
                     }
                 }
-            }
+            } 
 
             if (!blnValid) {
                 alert("Maaf, "+ sFileName + " invalid, Sistem hanya meneria extensi : "+ 

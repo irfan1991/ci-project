@@ -90,8 +90,6 @@ class Product extends Controller
         $data = array(
             'product_name' => $this->request->getPost('product_name'),
             'product_price' => $this->request->getPost('product_price'),
-            'product_name' => $this->request->getPost('product_name'),
-            'product_price' => $this->request->getPost('product_price'),
             'product_stock' => $this->request->getPost('product_stock'),
             'product_category' => $this->request->getPost('product_category'),
              'photo' => $getPhoto,

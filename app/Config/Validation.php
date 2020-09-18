@@ -47,4 +47,26 @@ class Validation
 			'required' => 'Status wajib diisi.'
 		]
 	];
+
+	public $product = [	
+		'product_name' => 'required',
+		'product_stock' => 'required',
+		'product_price' => 'required',
+		'product_category' => 'required',
+	];
+
+	public $product_errors = [
+		'product_name' => [
+			'required' => 'Nama Produk wajib diisi.'
+		],
+		'product_stock' => [
+			'required' => 'Stock Produk wajib diisi.'
+		],
+		'product_price' => [
+			'required' => 'Harga Produk wajib diisi.'
+		],
+		'product_category' => [
+			'required' => 'Kategori Produk wajib diisi.'
+		],
+	];
 }
