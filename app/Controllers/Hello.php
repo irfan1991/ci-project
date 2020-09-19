@@ -4,8 +4,11 @@ class Hello extends BaseController
 {
 	public function index()
 	{
-        $data['title'] = "Hello World  from Codeigniter 4";
-		return view('hello_view', $data);
+		echo view('layout/header');
+		echo view('layout/sidebar');
+		echo view('layout/topbar');
+        echo view('hello_view');
+        echo view('layout/footer');
     }
     
 public function hari($nama)

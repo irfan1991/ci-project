@@ -16,7 +16,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Hello');
+$routes->setDefaultController('Login');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -30,13 +30,15 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Hello::index');
-// $routes->group('api', function($routes)
-// {
-//     $routes->resource('users');
-// });
-$routes->resource('apicategory');
-$routes->resource('apiproduct');
+$routes->get('login', 'Login::index');
+$routes->post('login/proses', 'Login::proses');
+
+$routes->get('/hello', 'Hello::index', ['filter' => 'ceklogin']);
+$routes->get('/logout', 'Login::logout', ['filter' => 'ceklogin']);
+
+$routes->resource('api/product', ['controller' => 'ApiProduct']);
+$routes->resource('api/category', ['controller' => 'ApiCategory']);
+
 
 /**
  * --------------------------------------------------------------------

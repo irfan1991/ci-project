@@ -4,6 +4,7 @@
 use \Firebase\JWT\JWT;
 // panggil class Auht
 use App\Controllers\Auth;
+use Config\Services;
 // panggil restful api codeigniter 4
 use CodeIgniter\RESTful\ResourceController;
  
@@ -24,17 +25,13 @@ class Home extends ResourceController
  
     public function index()
     {
-        // ambil dari controller auth function public private key
-        $secret_key = $this->protect->privateKey();
- 
+       
+        $secret_key = ervices::getSecretKey();
         $token = null;
-		
         $authHeader = $this->request->getServer('HTTP_AUTHORIZATION');
-	
         $arr = explode(" ", $authHeader);
- 
         $token = $arr[1];
- 	
+
 		
         if($token){
  

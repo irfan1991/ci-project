@@ -2,6 +2,7 @@
 
 use CodeIgniter\Config\BaseConfig;
 
+
 class Filters extends BaseConfig
 {
 	// Makes reading things below nicer,
@@ -10,9 +11,12 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+		'authFilter' => \App\Filters\AuthFilter::class,
+		'ceklogin' => \App\Filters\LoginFilter::class,
+
 	];
 
-	// Always applied before every request
+	// Always applied before every reques
 	public $globals = [
 		'before' => [
 			//'honeypot'
@@ -32,5 +36,12 @@ class Filters extends BaseConfig
 	// List filter aliases and any before/after uri patterns
 	// that they should run on, like:
 	//    'isLoggedIn' => ['before' => ['account/*', 'profiles/*']],
-	public $filters = [];
+	public $filters = [
+		'authFilter' => [
+			'before' => [
+				'api/product/*',
+				'api/product',
+			],
+		],
+	];
 }

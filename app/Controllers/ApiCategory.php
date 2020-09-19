@@ -57,7 +57,7 @@ class ApiCategory extends ResourceController
                 'data' => $get
             ];
         } else {
-            $code = 401;
+            $code = 404;
             $response = [
                 'status' => $code ,
                 'error' => true,
@@ -79,7 +79,7 @@ class ApiCategory extends ResourceController
                 'data' => $get
             ];
         } else {
-            $code = 401;
+            $code = 404;
             $response = [
                 'status' => $code ,
                 'error' => true,
