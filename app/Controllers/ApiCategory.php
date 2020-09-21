@@ -1,5 +1,7 @@
 <?php 
 namespace App\Controllers;
+use Config\Services;
+use Firebase\JWT\JWT;
 use CodeIgniter\RESTful\ResourceController;
 
 class ApiCategory extends ResourceController
@@ -70,7 +72,7 @@ class ApiCategory extends ResourceController
     public function edit($id = NULL)
     {
         $get = $this->model->getCategory($id)->getRowArray();
-        var_dump($get);die();
+       
         if ($get) {
             $code = 200;
             $response = [

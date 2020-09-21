@@ -51,4 +51,14 @@ class Services extends CoreServices
 
 
 		}
+
+		public static function template(string $page = NULL, array $data = NULL)
+		{
+		
+			echo view('layout/header', $data) ;
+			echo view('layout/sidebar', $data);
+			echo view('layout/topbar', $data);
+			echo view($page, $data);
+			echo view('layout/footer', $data);
+		} 
 }

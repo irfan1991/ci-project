@@ -41,6 +41,8 @@ class Filters extends BaseConfig
 			'before' => [
 				'api/product/*',
 				'api/product',
+				'api/category/*',
+				'api/category',
 			],
 		],
 	];

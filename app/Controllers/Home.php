@@ -26,7 +26,7 @@ class Home extends ResourceController
     public function index()
     {
        
-        $secret_key = ervices::getSecretKey();
+        $secret_key = Services::getSecretKey();
         $token = null;
         $authHeader = $this->request->getServer('HTTP_AUTHORIZATION');
         $arr = explode(" ", $authHeader);

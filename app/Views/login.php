@@ -42,7 +42,7 @@
                     <a class="font-weight-bold small" href="register.html">Create an Account!</a>
                   </div> -->
                   <div class="text-center">
-                  </div> -->
+                  </div> 
                 </div>
               </div>
             </div>

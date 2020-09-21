@@ -3,9 +3,12 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\Product_model;
 use App\Models\Category_model;
+use Config\Services;
 
 class Product extends Controller
 {
+
+    protected $modul = "product";
 
     public function __construct()
     {
@@ -17,22 +20,27 @@ class Product extends Controller
     {
         $model = new Product_model();
         $data['products'] =  $model->getProduct();
-        return view('products/index', $data);
+        $data['title'] = 'Product List';
+        $data['arr'] = 'List';
+        Services::template('products/index', $data);
+       
     }
     
     public function add()
     {
         $model = new Category_model();
         $data['categories'] = $model->getCategory();
-        return view('products/add', $data);
+        $data['urlmethod'] = $this->modul.'/save';
+        $data['arr'] = 'Add';
+        $data['title'] = 'Form Product';
+        Services::template('products/form', $data);
     }
 
     public function save()
     {
         $model = new Product_model();
-        // $validate = $this->validate(['potho'] => )
-        $photo = $this->request->getFile('photo');
-          if ($photo != NULL) {
+          if ($_FILES['photo']['name'] != "") {
+            $photo = $this->request->getFile('photo');
             $photo->move(ROOTPATH.'public/uploads');
             $getPhoto = $photo->getName();
          } else {
@@ -49,6 +57,7 @@ class Product extends Controller
           
         );
         $model->saveProduct($data);
+        session()->setFlashData('success', 'Data is saved successfully!');
         return redirect()->to('/product');
     }
 
@@ -58,7 +67,10 @@ class Product extends Controller
         $modelCat = new Category_model();
         $data['categories'] = $modelCat->getCategory();
         $data['product'] = $model->getProduct($id)->getRow();
-        return view('products/edit', $data);
+        $data['urlmethod'] = $this->modul.'/update';
+        $data['arr'] = 'Edit';
+        $data['title'] = 'Form Product';
+        Services::template('products/form', $data);
     }
 
 
@@ -66,26 +78,28 @@ class Product extends Controller
     {
         $model = new Product_model();
         $data['product'] = $model->getProduct($id)->getRow();
-        return view('products/view', $data);
+        $data['arr'] = 'View';
+        $data['urlmethod'] = $this->modul;
+        $data['v'] = "";
+        $data['title'] = 'Product Detail';
+        Services::template('products/form', $data);
+        
     }
 
     public function update()
     {
         $model = new Product_model();
         $id = $this->request->getPost('product_id');
-        $photo = $this->request->getFile('photo');
         $cek = $model->where('product_id',$id)->first();
-       if ($photo != NULL) {
+       if ($_FILES['photo']['name'] != "") {
+          $photo = $this->request->getFile('photo');
           unlink(ROOTPATH.'public/uploads/'.$cek["photo"]);
           $photo->move(ROOTPATH.'public/uploads');
           $getPhoto = $photo->getName();
        } else {
           $getPhoto = $cek["photo"];
        }
-       
-       
-       
-//   var_dump($cek["photo"]);die();
+
         $value = '';
         $data = array(
             'product_name' => $this->request->getPost('product_name'),
@@ -96,6 +110,7 @@ class Product extends Controller
             'description' => $this->request->getPost('description'),
         );
         $model->updateProduct($data,$id);
+        session()->setFlashData('success', 'Data is updated successfully!');
         return redirect()->to('/product');
     }
 
@@ -103,10 +118,11 @@ class Product extends Controller
     {
         $model =  new Product_model();
         $cek = $model->where('product_id',$id)->first();
-        if ($cek["photo"] !== NULL || $cek["photo"] !== " ") {
+        if ($cek["photo"] != NULL ) {
             unlink(ROOTPATH.'public/uploads/'.$cek["photo"]);
         }
         $model->deleteProduct($id);
+        session()->setFlashData('success', 'Data is deleted successfully!');
         return redirect()->to('/product');
     }
 }
