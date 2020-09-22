@@ -142,7 +142,7 @@ class ApiProduct extends ResourceController
     public function edit($id = NULL)
     {
         $get = $this->model->getProduct($id)->getRowArray();
-        var_dump($get);die();
+
         if ($get) {
             $code = 200;
             $response = [

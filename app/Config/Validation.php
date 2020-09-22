@@ -69,4 +69,73 @@ class Validation
 			'required' => 'Kategori Produk wajib diisi.'
 		],
 	];
+
+	public $customer = [	
+		'customer_name' => 'required',
+		'customer_phone' => 'required',
+		'lat' => 'required',
+		'long' => 'required',
+		'street' => 'required',
+		'city' => 'required',
+		'country' => 'required',
+	];
+
+	public $customer_errors = [
+		'customer_name' => [
+			'required' => 'Nama Customer wajib diisi.'
+		],
+		'customer_phone' => [
+			'required' => 'Nomor Telpon wajib diisi.'
+		],
+		'lat' => [
+			'required' => 'Data latitude wajib diisi.'
+		],
+		'long' => [
+			'required' => 'Data longitude wajib diisi.'
+		],
+		'street' => [
+			'required' => 'Data street wajib diisi.'
+		],
+		'city' => [
+			'required' => 'Data city wajib diisi.'
+		],
+		'country' => [
+			'required' => 'Data country wajib diisi.'
+		],
+	];
+
+	public $supplier = [	
+		'supplier_name' => 'required',
+		'supplier_phone' => 'required',
+		'lat' => 'required',
+		'long' => 'required',
+		'street' => 'required',
+		'city' => 'required',
+		'country' => 'required',
+		
+	];
+
+	public $supplier_errors = [
+		'supplier_name' => [
+			'required' => 'Nama Supplier wajib diisi.'
+		],
+		'supplier_phone' => [
+			'required' => 'Nomor Supplier wajib diisi.'
+		],
+		'lat' => [
+			'required' => 'Data latitude wajib diisi.'
+		],
+		'long' => [
+			'required' => 'Data longitude wajib diisi.'
+		],
+		'street' => [
+			'required' => 'Data street wajib diisi.'
+		],
+		'city' => [
+			'required' => 'Data city wajib diisi.'
+		],
+		'country' => [
+			'required' => 'Data country wajib diisi.'
+		],
+	];
 }

@@ -40,6 +40,8 @@ defined('MONTH')  || define('MONTH', 2592000);
 defined('YEAR')   || define('YEAR', 31536000);
 defined('DECADE') || define('DECADE', 315360000);
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Exit Status Codes
@@ -76,3 +78,4 @@ defined('EXIT_DATABASE')       || define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
+define('API_KEY','AIzaSyBMSly_JNrqkrUVsx6gqD1qSCVkIyhfsE8');

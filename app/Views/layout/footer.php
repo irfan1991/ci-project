@@ -16,7 +16,7 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <script src="<?php echo base_url().'/template/vendor/jquery/jquery.min.js' ?>"></script>
+ 
   <!-- Page level plugins -->
   <script src="<?php echo base_url().'/template/vendor/datatables/jquery.dataTables.min.js' ?>"></script>
   <script src="<?php echo base_url().'/template/vendor/datatables/dataTables.bootstrap4.min.js' ?>"></script>

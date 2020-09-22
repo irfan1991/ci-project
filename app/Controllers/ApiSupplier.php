@@ -4,53 +4,66 @@ use Config\Services;
 use Firebase\JWT\JWT;
 use CodeIgniter\RESTful\ResourceController;
 
-class ApiCategory extends ResourceController
+class ApiSupplier extends ResourceController
 {
     protected $format = 'json';
-    protected $modelName = 'App\Models\Category_model';
+    protected $modelName = 'App\Models\Supplier_model';
 
     public function index()
     {
-        return $this->respond($this->model->findAll(), 200);
+       
+        return $this->respond($this->model->getSupplier(), 200);
     }
 
     public function create()
     {
+       
         $validation = \Config\Services::validation();
-        $name = $this->request->getPost('category_name');
-        $status = $this->request->getPost('category_status');
-        $data = [
-            'category_name' => $name,
-            'category_status' => $status
-        ];
-        if ($validation->run($data, 'category') == FALSE) {
-            $response = [
-                'status' => 500,
-                'error' => true,
-                'data' => $validation->getErrors(),
-            ];
-            return $this->respond($response, 500);
+        $name = $this->request->getPost('supplier_name');
+        $phone = $this->request->getPost('supplier_phone');
+        $lat = $this->request->getPost('lat');
+        $long = $this->request->getPost('long');
+        $street = $this->request->getPost('street');
+        $city = $this->request->getPost('city');
+        $country = $this->request->getPost('country');
 
-        } else {
-            $simpan = $this->model->saveCategory($data);
-            if ($simpan) {
-                $msg = ["message" => "Berhasil disimpan"];
+            $data = [
+                'supplier_name' => $name,
+                'supplier_phone' => $phone,
+                'lat' => $lat,
+                'long' => $long,
+                'street' => $street,
+                'city' => $city,
+                'country' => $country,
+            ];
+            if ($validation->run($data, 'supplier') == FALSE) {
                 $response = [
-                    'status' => 200,
-                    'error' => false,
-                    'data' => $msg
+                    'status' => 500,
+                    'error' => true,
+                    'data' => $validation->getErrors(),
                 ];
-                return $this->respond($response, 200);
+                return $this->respond($response, 500);
+    
+            } else {
+                $simpan = $this->model->saveSupplier($data);
+                if ($simpan) {
+                    $msg = ["message" => "Berhasil disimpan"];
+                    $response = [
+                        'status' => 200,
+                        'error' => false,
+                        'data' => $msg
+                    ];
+                    return $this->respond($response, 200);
+                }
+                
             }
+
             
         }
-        
-    }
-
-
+   
     public function show($id = NULL)
     {
-        $get = $this->model->getCategory($id)->getRowArray();
+        $get = $this->model->getSupplier($id)->getRowArray();
         if ($get) {
             $code = 200;
             $response = [
@@ -71,8 +84,8 @@ class ApiCategory extends ResourceController
 
     public function edit($id = NULL)
     {
-        $get = $this->model->getCategory($id)->getRowArray();
-       
+        $get = $this->model->getSupplier($id)->getRowArray();
+      
         if ($get) {
             $code = 200;
             $response = [
@@ -92,14 +105,12 @@ class ApiCategory extends ResourceController
     }
 
 
-   
-
     public function update($id = NULL)
     {
         $validation = \Config\Services::validation();
        
         $data = $this->request->getRawInput();
-        if ($validation->run($data, 'category') == FALSE) {
+        if ($validation->run($data, 'supplier') == FALSE) {
             
             $response = [
                 'status' => 500,
@@ -108,7 +119,7 @@ class ApiCategory extends ResourceController
             ];
             return $this->respond($response,500);
         } else {
-            $simpan = $this->model->updateCategory($data, $id);
+            $simpan = $this->model->updateSupplier($data, $id);
             if ($simpan) {
                 $msg = ['message' => 'Data berhasil diupdate'];
                 $response = [
@@ -127,10 +138,10 @@ class ApiCategory extends ResourceController
 
     public function delete($id = NULL)
     {
-        $hapus = $this->model->deleteCategory($id);
+        $hapus = $this->model->deleteSupplier($id);
         if ($hapus) {
             $code = 200;
-            $msg = ['message' => 'Deleted category successfully'];
+            $msg = ['message' => 'Deleted data successfully'];
             $response = [
                 'status' => $code,
                 'error' => false,
@@ -148,6 +159,7 @@ class ApiCategory extends ResourceController
         }
         return $this->respond($response);
     }
+
 
 
 }

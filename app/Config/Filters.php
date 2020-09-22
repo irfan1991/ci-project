@@ -43,6 +43,10 @@ class Filters extends BaseConfig
 				'api/product',
 				'api/category/*',
 				'api/category',
+				'api/customer/*',
+				'api/customer',
+				'api/supplier/*',
+				'api/supplier',
 			],
 		],
 	];

@@ -2,10 +2,10 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class Category_model extends Model {
-    protected $table = "categories";
+class Customer_model extends Model {
+    protected $table = "customers";
     
-    public function getCategory($id = false)
+    public function getCustomer($id = false)
     {
         if ($id === false) {
             return $this->findAll();
@@ -15,19 +15,19 @@ class Category_model extends Model {
         
     }
 
-    public function saveCategory($data)
+    public function saveCustomer($data)
     {
         $query = $this->db->table($this->table)->insert($data);
         return $query;
     }
 
-    public function updateCategory($data, $id)
+    public function updateCustomer($data, $id)
     {
         $query = $this->db->table($this->table)->update($data, array('id' => $id));
         return $query;
     }
 
-    public function deleteCategory($id)
+    public function deleteCustomer($id)
     {
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;

@@ -38,7 +38,8 @@ $routes->get('/logout', 'Login::logout', ['filter' => 'ceklogin']);
 
 $routes->resource('api/product', ['controller' => 'ApiProduct']);
 $routes->resource('api/category', ['controller' => 'ApiCategory']);
-
+$routes->resource('api/customer', ['controller' => 'ApiCustomer']);
+$routes->resource('api/supplier', ['controller' => 'ApiSupplier']);
 
 /**
  * --------------------------------------------------------------------

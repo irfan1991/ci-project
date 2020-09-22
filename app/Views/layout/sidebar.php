@@ -57,8 +57,8 @@
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Entity</h6>
-            <a class="collapse-item" href="simple-tables.html">Customers</a>
-            <a class="collapse-item" href="datatables.html">Suppliers</a>
+            <a class="collapse-item" href="<?php echo base_url('customer'); ?>">Customers</a>
+            <a class="collapse-item" href="<?php echo base_url('supplier'); ?>">Suppliers</a>
           </div>
         </div>
       </li>

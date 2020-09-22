@@ -54,7 +54,7 @@ $btn = isset($category) ? "Ubah" : "Simpan";
                     <?php if ($v == "") { ?>
                       <button type="submit" class="btn btn-primary"><?php echo $btn; ?></button>
                     <?php }?>
-                    <a href="/product" class="btn btn-primary" >Kembali</a>
+                    <a href="/category" class="btn btn-primary" >Kembali</a>
                   </form>
                 </div>
               </div>

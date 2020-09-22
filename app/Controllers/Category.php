@@ -74,6 +74,7 @@ class Category extends Controller
 
     public function delete($id)
     {
+        
         try {
             $model =  new Category_model();
             $model->deleteCategory($id);
