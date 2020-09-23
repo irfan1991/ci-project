@@ -48,6 +48,7 @@ $btn = isset($customer) ? "Ubah" : "Simpan";
                       <small id="customer_name" class="form-text text-muted">Input customer name  properly.</small>
                     </div>
 
+                    <div class="form-group">
                     <label for="customer_phone">Phone Number</label>
                       <input type="number" class="form-control" id="customer_phone" name="customer_phone" aria-describedby="customer_phone"
                         placeholder="Enter name" value="<?php echo $customer_phone?>" <?php echo $v; ?> required>
@@ -62,32 +63,36 @@ $btn = isset($customer) ? "Ubah" : "Simpan";
 				                  <div id="map-canvas"></div>
                     </div>
 
-                    <label for="lat">Latitude</label>
+                    <div class="form-group">
+                      <label for="lat">Latitude</label>
                       <input type="text" class="form-control" id="lat" name="lat" aria-describedby="lati"
                         placeholder="Latitude" value="<?php echo $lat?>" readonly required>
                       <small id="lati" class="form-text text-muted">Display latitude automaticly.</small>
                     </div>
 
-                    <label for="lng">Longitude</label>
+                    <div class="form-group">
+                      <label for="lng">Longitude</label>
                       <input type="text" class="form-control" id="lng" name="long" aria-describedby="long"
                         placeholder="Longitude" value="<?php echo $long?>" readonly required>
                       <small id="long" class="form-text text-muted">Display longitude automaticly.</small>
                     </div>
                  
-                 
-                    <label for="street">Street</label>
+                    <div class="form-group">
+                      <label for="street">Street</label>
                       <input type="text" class="form-control" id="street" name="street" aria-describedby="street"
                         placeholder="Enter Street" value="<?php echo $street ?>" <?php echo $v; ?> required>
                       <small id="street" class="form-text text-muted">Input customer street address properly.</small>
                     </div>
-                
-                    <label for="city">City</label>
+
+                    <div class="form-group">
+                      <label for="city">City</label>
                       <input type="text" class="form-control" id="city" name="city" aria-describedby="city"
                         placeholder="Enter City" value="<?php echo $city ?>" <?php echo $v; ?> required>
                       <small id="city" class="form-text text-muted">Input customer city address properly.</small>
                     </div>
 
-                    <label for="country">Country</label>
+                    <div class="form-group">
+                      <label for="country">Country</label>
                       <input type="text" class="form-control" id="country" name="country" aria-describedby="country"
                         placeholder="Enter Country" value="<?php echo $country ?>" <?php echo $v; ?> required>
                       <small id="country" class="form-text text-muted">Input customer country address properly.</small>
