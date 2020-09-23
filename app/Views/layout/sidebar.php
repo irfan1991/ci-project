@@ -63,16 +63,16 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable2" aria-expanded="true"
           aria-controls="collapseTable">
           <i class="fas fa-fw fa-shopping-cart"></i>
           <span>Transaction</span>
         </a>
-        <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+        <div id="collapseTable2" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Transaction</h6>
-            <a class="collapse-item" href="simple-tables.html">Input</a>
-            <a class="collapse-item" href="datatables.html">Output</a>
+            <a class="collapse-item" href="<?php echo base_url('input'); ?>">Input</a>
+            <a class="collapse-item" href="<?php echo base_url('output'); ?>">Output</a>
           </div>
         </div>
       </li>

@@ -4,12 +4,14 @@ use CodeIgniter\Controller;
 use App\Models\Supplier_model;
 use Config\Services;
 
+
 class Supplier extends Controller
 {
     protected $modul = "supplier";
-
+    
     public function index()
     {
+       // var_dump(session('lastname'));die();
         $model = new Supplier_model();
         $data['suppliers'] =  $model->getSupplier();
         $data['title'] = 'Supplier List';
