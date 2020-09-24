@@ -49,8 +49,8 @@
                                 <td><?php echo str_replace('`', '',$row['waktu']) ?></td>
                                 <td><?php echo $row['createdby']?></td>
                                 <td>
-                                    <a  class="btn btn-info" href="/input/view/<?php echo $row['id'] ?>"><i class="fas fa-eye"></i></a>
-                                    <button  class="btn btn-danger remove" id="test" type="submit" value="<?php echo $row['id']?>">
+                                    <a  class="btn btn-info" href="/input/view/<?php echo $row['supplier_id']?>/<?php echo $row['time']?>"><i class="fas fa-eye"></i></a>
+                                    <button  class="btn btn-danger remove" id="test" type="submit" value="<?php echo $row['supplier_id']?>/<?php echo $row['time']?>">
                                     <i class="fas fa-trash"></i> </button>
                                 </td>
                             </tr>

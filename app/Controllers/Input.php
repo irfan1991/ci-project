@@ -34,31 +34,35 @@ class Input extends Controller
 
     public function save()
     {
+        $supplier = $this->request->getPost('supplier_id');
+        $product_id = $this->request->getPost('idbrg');
+        $amount = $this->request->getPost('qty');
+        $myTime = new Time('now', 'Asia/Jakarta', 'en_ID');
+        $createdBy = session('firstname').' '.session('lastname');
         $model = new Input_model();
-        $data = array(
-            'input_name' => $this->request->getPost('input_name'),
-            'input_status' => $this->request->getPost('status'),
-        );
-        $model->saveInput($data);
+        
+        for ($i=0; $i < count($product_id); $i++) { 
+            $data = array(
+                 'supplier_id' => $supplier ,
+                 'product_id' => $product_id[$i],
+                 'amount' => $amount[$i],
+                 'time' => $myTime,
+                 'createdBy' => $createdBy
+            );
+            $model->saveInput($data);
+        }
+        
         session()->setFlashData('success', 'Data is saved successfully!');
         return redirect()->to('/input');
     }
 
-    public function edit($id)
-    {
-        $model = new Input_model();
-        $data['input'] = $model->getInput($id)->getRow();
-        $data['urlmethod'] = $this->modul.'/update';
-        $data['arr'] = 'Edit';
-        $data['title'] = 'Form Input';
-        Services::template('inputs/form', $data);
-    }
 
 
-    public function view($id)
+    public function view($id,$time)
     {
         $model = new Input_model();
-        $data['input'] = $model->getInput($id)->getRow();
+      //  var_dump($model->getInput($id,$time)); die();
+        $data['input'] = $model->getInput($id,$time);
         $data['arr'] = 'View';
         $data['urlmethod'] = $this->modul;
         $data['v'] = "";
@@ -66,25 +70,13 @@ class Input extends Controller
         Services::template('inputs/form', $data);
     }
 
-    public function update()
-    {
-        $model = new Input_model();
-        $id = $this->request->getPost('id');
-        $data = array(
-            'input_name' => $this->request->getPost('input_name'),
-            'input_status' => $this->request->getPost('status'),
-        );
-        $model->updateInput($data,$id);
-        session()->setFlashData('success', 'Data is updated successfully!');
-        return redirect()->to('/input');
-    }
-
-    public function delete($id)
+    
+    public function delete($id,$time)
     {
         
         try {
             $model =  new Input_model();
-            $model->deleteInput($id);
+            $model->deleteInput($id,$time);
         } catch (\Throwable $th) {
             //throw $th;
             session()->setFlashData('error', 'Something wrongs because '.$th->getMessage());

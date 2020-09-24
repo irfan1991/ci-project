@@ -1,5 +1,6 @@
 <?php
-$supplier = isset($supplier) ? $supplier->supplier_name : "";
+$supplier = isset($input) ? $input[0]['supplier_name'] : "";
+$time = isset($input) ? str_replace('`', '',$input[0]['waktu']) : "";
 $v = isset($v) ? "readonly" : "";
 $btn = isset($input) ? "Ubah" : "Simpan";
 ?>
@@ -24,7 +25,13 @@ $btn = isset($input) ? "Ubah" : "Simpan";
                 <div class="card-body">
                   <form action="<?php echo site_url($urlmethod) ?>" method="post"  enctype="multipart/form-data" id="my-form">
                    
-        
+                  <div class="form-group">
+                      <label for="time">Time</label>
+                      <input type="text" class="form-control" id="time"  aria-describedby="time"
+                        value="<?php echo $time?>" <?php echo $v; ?> required>
+                      <small id="time" class="form-text text-muted">Time data is updated.</small>
+                    </div>
+
                   <div class="form-group">
                     <label for="select2Single">Suppliers</label>
                     <?php if ($v == "") { ?>
@@ -46,6 +53,42 @@ $btn = isset($input) ? "Ubah" : "Simpan";
 
                   <div class="form-group">
                     <label for="tabledata">Products List</label>
+
+                    <?php if ($v !== "") { ?>
+
+                          <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                            <thead class="thead-light">
+                              <tr>
+                              <th>No</th>
+                              <th>Product Name</th>
+                              <th>Qty</th>
+                              </tr>
+                            </thead>
+                            <tfoot>
+                              <tr>
+                              <th>No</th>
+                              <th>Product Name</th>
+                              <th>Qty</th>
+                              </tr>
+                            </tfoot>
+                            <tbody>
+                              
+                              <?php 
+                                $no = 1;
+                                foreach ($input as $row) { ?>
+                                    <tr>
+                                        <td><?php echo $no++ ?></td>
+                                        <td><?php echo $row['product_name']?></td>
+                                        <td><?php echo $row['amount']?></td>
+                                    </tr>
+                                <?php }?>
+                              
+                          
+                            </tbody>
+                          </table>
+
+                    <?php } else { ?>
+
                       <table class="table table-hover" id="databrg" required>
                           <thead>
                             <tr>
@@ -57,6 +100,9 @@ $btn = isset($input) ? "Ubah" : "Simpan";
                           <tbody></tbody>
                         </table>
                         <a class="btn btn-success" onClick="tambah()"><i class="fas fa-plus"></i> Tambah Baris</a>
+
+                    <?php } ?>
+                     
                         <br/>
                   </div>
                     <?php if ($v == "") { ?>
@@ -70,53 +116,56 @@ $btn = isset($input) ? "Ubah" : "Simpan";
         </div>
 
         <script>
-        var products= <?= json_encode($products);?>;
-        
-      function tambah()
-              {
-                var tbl = $('#databrg');
-                var lastRow = tbl.find("tr").length;
-                var idlast = lastRow -1;
-                var emptyrows = 0;
-                for (i=idlast; i<lastRow; i++) {
-                  if ($("#idbrg"+i).val() == '' || $("#qty"+i).val() == '' ) {
-                    emptyrows += 1;
+          <?php if ($v === "") { ?>
+
+                var products= <?= json_encode($products);?>;
+              
+              function tambah()
+                      {
+                        var tbl = $('#databrg');
+                        var lastRow = tbl.find("tr").length;
+                        var idlast = lastRow -1;
+                        var emptyrows = 0;
+                        for (i=idlast; i<lastRow; i++) {
+                          if ($("#idbrg"+i).val() == '' || $("#qty"+i).val() == '' ) {
+                            emptyrows += 1;
+                          }
+                        }
+                          
+                        if (emptyrows == 0 ) {
+                          var opt = '';
+                          $.each(products, function() {
+                            opt += '<option value="' + this.product_id + '">'+this.product_name+'</option>';
+                          });		
+                          
+                          var ddlBrg = '<select name="idbrg[]" id="idbrg'+lastRow+'" class="select2-single form-control idbrg" required>'+opt+'</select>';
+                          var txtJml = '<input type="text" name="qty[]" class="form-control qty" id="qty'+lastRow+'" data-rule-required="true" data-rule-number="true"/>';
+                          var trash = '<i class="fas fa-trash" onClick="hapus('+lastRow+')"></i>';
+                          tbl.append("<tr id='tr"+lastRow+"'><td>"+ddlBrg+"</td><td align='right'>"+txtJml+"</td><td><center>"+trash+"</center></td></tr>");
+                        } else  {
+                            alert("Silahkan mengisi data pada baris yang tersedia terlebih dahulu, sebelum menambah baris");
+                        }
+                      
                   }
-                }
+        
+              function hapus(id){
+                    $('#databrg #tr'+id).remove();
+                  }	;
+        
+              document.getElementById('my-form').addEventListener("submit",function(e) {
                   
-                if (emptyrows == 0 ) {
-                  var opt = '';//'<option value=""></option>';
-                  $.each(products, function() {
-                    opt += '<option value="">Choose Product</option>';
-                    opt += '<option value="' + this.product_id + '">'+this.product_name+'</option>';
-                  });		
-                  
-                  var ddlBrg = '<select name="idbrg[]" id="idbrg'+lastRow+'" class="select2-single form-control" required>'+opt+'</select>';
-                  var txtJml = '<input type="text" name="qty[]" class="form-control qty" id="qty'+lastRow+'" data-rule-required="true" data-rule-number="true"/>';
-                  var trash = '<i class="fas fa-trash" onClick="hapus('+lastRow+')"></i>';
-                  tbl.append("<tr id='tr"+lastRow+"'><td>"+ddlBrg+"</td><td align='right'>"+txtJml+"</td><td><center>"+trash+"</center></td></tr>");
-                } else  {
-                    alert("Silahkan mengisi data pada baris yang tersedia terlebih dahulu, sebelum menambah baris");
-                }
-                //$('.chosenMat'+lastRow).chosen({width: "100%"});
-                
-          }
+                    if ($('#databrg').find("td").length == 0) {
+                      e.preventDefault(); // before the code
+        
+                              alert(`Silahkan mengisi data produk`);
+                              return false;
+                            } else {
+                              return true;
+                            }
+              });
 
-      function hapus(id){
-            $('#databrg #tr'+id).remove();
-          }	;
-
-      document.getElementById('my-form').addEventListener("submit",function(e) {
-          
-            if ($('#databrg').find("td").length == 0) {
-              e.preventDefault(); // before the code
-
-                      alert(`Silahkan mengisi data produk`);
-                      return false;
-                    } else {
-                      return true;
-                    }
-      });
+        <?php } ?>
+        
           
         </script>
 

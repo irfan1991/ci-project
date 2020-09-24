@@ -5,17 +5,17 @@ use CodeIgniter\Model;
 class Input_model extends Model {
     protected $table = "inputs";
     
-    public function getInput($id = false)
+    public function getInput($id = false, $time = false)
     {
-        if ($id === false) {
+        if ($id === false AND $time === false) {
             return $this->db->table($this->table." a ")
             ->select(' a.*, DATE_FORMAT(a.time, "%W,%M %e %Y, %r") as waktu , b.product_name, c.supplier_name')->join('product b ','a.product_id=b.product_id','left')
-            ->join('suppliers c ','a.supplier_id=c.id','left')
+            ->join('suppliers c ','a.supplier_id=c.id','left')->groupBy(["a.supplier_id", "a.time"])
             ->get()->getResultArray();
         } else {
             return $this->db->table($this->table." a ")
             ->select(' a.*, DATE_FORMAT(a.time, "%W, %M %e %Y, %r") as waktu , b.product_name, c.supplier_name')->join('product b ','a.product_id=b.product_id','left')
-            ->join('suppliers c ','a.supplier_id=c.id','left')->getWhere(['id' => $id]);
+            ->join('suppliers c ','a.supplier_id=c.id','left')->getWhere(['supplier_id' => $id, 'time' => $time])->getResultArray();
         }
         
     }
@@ -26,15 +26,10 @@ class Input_model extends Model {
         return $query;
     }
 
-    public function updateInput($data, $id)
-    {
-        $query = $this->db->table($this->table)->update($data, array('id' => $id));
-        return $query;
-    }
 
-    public function deleteInput($id)
+    public function deleteInput($id,$time)
     {
-        $query = $this->db->table($this->table)->delete(array('id' => $id));
+        $query = $this->db->table($this->table)->delete(array('supplier_id' => $id, 'time' => $time));
         return $query;
     }
 }

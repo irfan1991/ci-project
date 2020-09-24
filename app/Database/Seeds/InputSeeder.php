@@ -17,7 +17,6 @@ class InputSeeder extends Seeder
             'amount' =>  12,
             'time' => $myTime,
             'createdBy' => 'Irfan',
-           
         ];
 
      
