@@ -2,12 +2,14 @@
 namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\Input_model;
+use App\Models\Product_model;
+use App\Models\Supplier_model;
 use Config\Services;
 use CodeIgniter\I18n\Time;
 
 class Input extends Controller
 {
-    protected $modul = "category";
+    protected $modul = "input";
 
     public function index()
     {  
@@ -20,6 +22,10 @@ class Input extends Controller
     
     public function add()
     {
+        $model = new Product_model();
+        $models = new Supplier_model();
+        $data['products'] =  $model->getProduct();
+        $data['suppliers'] =  $models->getSupplier();
         $data['urlmethod'] = $this->modul.'/save';
         $data['arr'] = 'Add';
         $data['title'] = 'Form Input';
@@ -30,18 +36,18 @@ class Input extends Controller
     {
         $model = new Input_model();
         $data = array(
-            'category_name' => $this->request->getPost('category_name'),
-            'category_status' => $this->request->getPost('status'),
+            'input_name' => $this->request->getPost('input_name'),
+            'input_status' => $this->request->getPost('status'),
         );
         $model->saveInput($data);
         session()->setFlashData('success', 'Data is saved successfully!');
-        return redirect()->to('/category');
+        return redirect()->to('/input');
     }
 
     public function edit($id)
     {
         $model = new Input_model();
-        $data['category'] = $model->getInput($id)->getRow();
+        $data['input'] = $model->getInput($id)->getRow();
         $data['urlmethod'] = $this->modul.'/update';
         $data['arr'] = 'Edit';
         $data['title'] = 'Form Input';
@@ -52,7 +58,7 @@ class Input extends Controller
     public function view($id)
     {
         $model = new Input_model();
-        $data['category'] = $model->getInput($id)->getRow();
+        $data['input'] = $model->getInput($id)->getRow();
         $data['arr'] = 'View';
         $data['urlmethod'] = $this->modul;
         $data['v'] = "";
@@ -65,12 +71,12 @@ class Input extends Controller
         $model = new Input_model();
         $id = $this->request->getPost('id');
         $data = array(
-            'category_name' => $this->request->getPost('category_name'),
-            'category_status' => $this->request->getPost('status'),
+            'input_name' => $this->request->getPost('input_name'),
+            'input_status' => $this->request->getPost('status'),
         );
         $model->updateInput($data,$id);
         session()->setFlashData('success', 'Data is updated successfully!');
-        return redirect()->to('/category');
+        return redirect()->to('/input');
     }
 
     public function delete($id)
@@ -82,10 +88,10 @@ class Input extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             session()->setFlashData('error', 'Something wrongs because '.$th->getMessage());
-            return redirect()->to('/category');
+            return redirect()->to('/input');
         }
        
-        return redirect()->to('/category');
+        return redirect()->to('/input');
     }
 }
 

@@ -4,7 +4,7 @@
             <h1 class="h3 mb-0 text-gray-800">Transaction</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="<?php echo base_url('/hello'); ?>">Dashboard</a></li>
-              <li class="breadcrumb-item">Transaction</li>
+              <li class="breadcrumb-item">Input</li>
               <li class="breadcrumb-item active" aria-current="page"><?php echo $arr; ?></li>
             </ol>
           </div>
@@ -23,9 +23,7 @@
                     <thead class="thead-light">
                       <tr>
                       <th>No</th>
-                      <th>Product</th>
                       <th>Supplier</th>
-                      <th>Amount</th>
                       <th>Time Input</th>
                       <th>Signed By</th>
                       <th>Action</th>
@@ -34,9 +32,7 @@
                     <tfoot>
                       <tr>
                       <th>No</th>
-                      <th>Product</th>
                       <th>Supplier</th>
-                      <th>Amount</th>
                       <th>Time Input</th>
                       <th>Signed By</th>
                       <th>Action</th>
@@ -49,13 +45,10 @@
                         foreach ($inputs as $row) { ?>
                             <tr>
                                 <td><?php echo $no++ ?></td>
-                                <td><?php echo $row['product_name']?></td>
                                 <td><?php echo $row['supplier_name']?></td>
-                                <td><?php echo $row['amount']?></td>
-                                <td><?php 
-                                   echo str_replace('`', '',$row['waktu']) ?></td>
+                                <td><?php echo str_replace('`', '',$row['waktu']) ?></td>
                                 <td><?php echo $row['createdby']?></td>
-                                <td><a class="btn btn-warning" href="/input/edit/<?php echo $row['id'] ?>"><i class="fas fa-pen"></i></a>
+                                <td>
                                     <a  class="btn btn-info" href="/input/view/<?php echo $row['id'] ?>"><i class="fas fa-eye"></i></a>
                                     <button  class="btn btn-danger remove" id="test" type="submit" value="<?php echo $row['id']?>">
                                     <i class="fas fa-trash"></i> </button>

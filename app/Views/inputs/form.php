@@ -1,18 +1,15 @@
 <?php
-
-$id = isset($category) ? $category->id : "";
-$category_name = isset($category) ? $category->category_name : "";
-$category_status = isset($category) ? $category->category_status : "";
+$supplier = isset($supplier) ? $supplier->supplier_name : "";
 $v = isset($v) ? "readonly" : "";
-$btn = isset($category) ? "Ubah" : "Simpan";
+$btn = isset($input) ? "Ubah" : "Simpan";
 ?>
 <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Products</h1>
+            <h1 class="h3 mb-0 text-gray-800">Transaction</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="<?php echo base_url('/hello'); ?>">Dashboard</a></li>
-              <li class="breadcrumb-item">Product</li>
+              <li class="breadcrumb-item">Input</li>
               <li class="breadcrumb-item active" aria-current="page"><?php echo $arr; ?></li>
             </ol>
           </div>
@@ -26,40 +23,86 @@ $btn = isset($category) ? "Ubah" : "Simpan";
                 </div>
                 <div class="card-body">
                   <form action="<?php echo site_url($urlmethod) ?>" method="post"  enctype="multipart/form-data">
-                  <input type="hidden" name="id" value="<?php echo $id; ?>">  
+                   
+        
                   <div class="form-group">
-                      <label for="category_name">Name</label>
-                      <input type="text" class="form-control" id="category_name" name="category_name" aria-describedby="category_name"
-                        placeholder="Enter name" value="<?php echo $category_name?>" <?php echo $v; ?> required>
-                      <small id="category_name" class="form-text text-muted">Input category name  properly.</small>
-                    </div>
+                    <label for="select2Single">Suppliers</label>
+                    <?php if ($v == "") { ?>
 
-                    <fieldset class="form-group">
-                      <div class="row">
-                        <legend class="col-form-label col-sm-3 pt-0">Status</legend>
-                        <div class="col-sm-9">
-                          <div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio1" name="status" class="custom-control-input" value="Active" <?php if($category_status=='Active') echo 'checked'?> checked>
-                            <label class="custom-control-label" for="customRadio1">Active</label>
-                          </div>
-                          <div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio2" name="status" class="custom-control-input" value="Inactive" <?php if($category_status=='Inactive') echo 'checked'?>>
-                            <label class="custom-control-label" for="customRadio2">Inactive</label>
-                          </div>
-                          
+                      <select class="select2-single form-control"  name="supplier_id" id="select2Single"  <?php echo $v; ?> required>
+                        <option value="" selected>Choose Supplier</option>
+                          <?php  foreach ($suppliers as $row) { ?>
+                            <option value="<?php echo $row["id"] ?>"><?php echo $row["supplier_name"];  ?></option>
+                          <?php }?>
+                      </select>
 
-                      </div>
-                    </fieldset>
-                
+                        <?php } else {?>
+
+                      <p><?php echo $supplier; ?></p>
+                      
+                    <?php } ?>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tabledata">Products List</label>
+                      <table class="table table-hover" id="databrg">
+                          <thead>
+                            <tr>
+                              <th>Product Name</th>
+                              <th>Qty</th>
+                              <th><i class="fas fa-trash-o"></i></th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                        <a class="btn btn-success" onClick="tambah()"><i class="fas fa-plus"></i> Tambah Baris</a>
+                        <br/>
+                  </div>
                     <?php if ($v == "") { ?>
                       <button type="submit" class="btn btn-primary"><?php echo $btn; ?></button>
                     <?php }?>
-                    <a href="/category" class="btn btn-primary" >Kembali</a>
+                    <a href="/input" class="btn btn-primary" >Kembali</a>
                   </form>
                 </div>
               </div>
             </div>
         </div>
+
+        <script>
+        var products= <?= json_encode($products);?>;
+        function tambah()
+              {
+                var tbl = $('#databrg');
+                var lastRow = tbl.find("tr").length;
+                var idlast = lastRow -1;
+                var emptyrows = 0;
+                for (i=idlast; i<lastRow; i++) {
+                  if ($("#idbrg"+i).val() == '' || $("#qty"+i).val() == '' ) {
+                    emptyrows += 1;
+                  }
+                }
+                  
+                if (emptyrows == 0 ) {
+                  var opt = '';//'<option value=""></option>';
+                  $.each(products, function() {
+                    opt += '<option value="' + this.product_id + '">'+this.product_name+'</option>';
+                  });		
+                  
+                  var ddlBrg = '<select name="idbrg[]" id="idbrg'+lastRow+'" class="form-control idbrg chosenMat'+lastRow+'" data-placeholder="-Pilih Obat-">'+opt+'</select>';
+                  var txtJml = '<input type="text" name="qty[]" class="form-control qty" id="qty'+lastRow+'" data-rule-required="true" data-rule-number="true"/>';
+                  var trash = '<i class="fas fa-trash" onClick="hapus('+lastRow+')"></i>';
+                  tbl.append("<tr id='tr"+lastRow+"'><td>"+ddlBrg+"</td><td align='right'>"+txtJml+"</td><td><center>"+trash+"</center></td></tr>");
+                } else {
+                    alert("<h4>Silahkan mengisi data pada baris yang tersedia terlebih dahulu, sebelum menambah baris.</h4>");
+                }
+                $('.chosenMat'+lastRow).chosen({width: "100%"});
+                
+          }
+
+      function hapus(id){
+            $('#databrg #tr'+id).remove();
+          }	;
+        </script>
 
 
   
