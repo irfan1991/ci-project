@@ -22,14 +22,15 @@ $btn = isset($input) ? "Ubah" : "Simpan";
                   <h6 class="m-0 font-weight-bold text-primary"><?php echo $title; ?></h6>
                 </div>
                 <div class="card-body">
-                  <form action="<?php echo site_url($urlmethod) ?>" method="post"  enctype="multipart/form-data">
+                  <form action="<?php echo site_url($urlmethod) ?>" method="post"  enctype="multipart/form-data" id="my-form">
                    
         
                   <div class="form-group">
                     <label for="select2Single">Suppliers</label>
                     <?php if ($v == "") { ?>
 
-                      <select class="select2-single form-control"  name="supplier_id" id="select2Single"  <?php echo $v; ?> required>
+                      <select class="select2-single form-control"  name="supplier_id" id="select2Single"  
+                      <?php echo $v; ?> required style="width:100%">
                         <option value="" selected>Choose Supplier</option>
                           <?php  foreach ($suppliers as $row) { ?>
                             <option value="<?php echo $row["id"] ?>"><?php echo $row["supplier_name"];  ?></option>
@@ -45,7 +46,7 @@ $btn = isset($input) ? "Ubah" : "Simpan";
 
                   <div class="form-group">
                     <label for="tabledata">Products List</label>
-                      <table class="table table-hover" id="databrg">
+                      <table class="table table-hover" id="databrg" required>
                           <thead>
                             <tr>
                               <th>Product Name</th>
@@ -59,7 +60,7 @@ $btn = isset($input) ? "Ubah" : "Simpan";
                         <br/>
                   </div>
                     <?php if ($v == "") { ?>
-                      <button type="submit" class="btn btn-primary"><?php echo $btn; ?></button>
+                      <button type="submit" class="btn btn-primary" ><?php echo $btn; ?></button>
                     <?php }?>
                     <a href="/input" class="btn btn-primary" >Kembali</a>
                   </form>
@@ -70,7 +71,8 @@ $btn = isset($input) ? "Ubah" : "Simpan";
 
         <script>
         var products= <?= json_encode($products);?>;
-        function tambah()
+        
+      function tambah()
               {
                 var tbl = $('#databrg');
                 var lastRow = tbl.find("tr").length;
@@ -85,23 +87,37 @@ $btn = isset($input) ? "Ubah" : "Simpan";
                 if (emptyrows == 0 ) {
                   var opt = '';//'<option value=""></option>';
                   $.each(products, function() {
+                    opt += '<option value="">Choose Product</option>';
                     opt += '<option value="' + this.product_id + '">'+this.product_name+'</option>';
                   });		
                   
-                  var ddlBrg = '<select name="idbrg[]" id="idbrg'+lastRow+'" class="form-control idbrg chosenMat'+lastRow+'" data-placeholder="-Pilih Obat-">'+opt+'</select>';
+                  var ddlBrg = '<select name="idbrg[]" id="idbrg'+lastRow+'" class="select2-single form-control" required>'+opt+'</select>';
                   var txtJml = '<input type="text" name="qty[]" class="form-control qty" id="qty'+lastRow+'" data-rule-required="true" data-rule-number="true"/>';
                   var trash = '<i class="fas fa-trash" onClick="hapus('+lastRow+')"></i>';
                   tbl.append("<tr id='tr"+lastRow+"'><td>"+ddlBrg+"</td><td align='right'>"+txtJml+"</td><td><center>"+trash+"</center></td></tr>");
-                } else {
-                    alert("<h4>Silahkan mengisi data pada baris yang tersedia terlebih dahulu, sebelum menambah baris.</h4>");
+                } else  {
+                    alert("Silahkan mengisi data pada baris yang tersedia terlebih dahulu, sebelum menambah baris");
                 }
-                $('.chosenMat'+lastRow).chosen({width: "100%"});
+                //$('.chosenMat'+lastRow).chosen({width: "100%"});
                 
           }
 
       function hapus(id){
             $('#databrg #tr'+id).remove();
           }	;
+
+      document.getElementById('my-form').addEventListener("submit",function(e) {
+          
+            if ($('#databrg').find("td").length == 0) {
+              e.preventDefault(); // before the code
+
+                      alert(`Silahkan mengisi data produk`);
+                      return false;
+                    } else {
+                      return true;
+                    }
+      });
+          
         </script>
 
 
