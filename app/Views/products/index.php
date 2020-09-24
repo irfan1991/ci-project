@@ -59,7 +59,7 @@
                                 <td><?php echo $row['description']?></td>
                                 <td><a class="btn btn-warning" href="/product/edit/<?php echo $row['product_id'] ?>"><i class="fas fa-pen"></i></a>
                                 <a  class="btn btn-info" href="/product/view/<?php echo $row['product_id'] ?>"><i class="fas fa-eye"></i></a>
-                                <button  class="btn btn-danger remove" id="test" type="submit" value="<?php echo $row['product_id']?>">
+                                <button  class="btn btn-danger remove" id="<?php echo $row['product_id']?>" type="submit" value="<?php echo $row['product_id']?>">
                                     <i class="fas fa-trash"></i> </button>
                                 </td>
                             </tr>
@@ -83,7 +83,7 @@
 
 $(".remove").click(function(){
 
-    var id = document.getElementById("test").value;;
+  var id = $(this).val();
 
 console.log(id);
 

@@ -50,7 +50,7 @@
                                 <td><?php echo $row['createdby']?></td>
                                 <td>
                                     <a  class="btn btn-info" href="/input/view/<?php echo $row['supplier_id']?>/<?php echo $row['time']?>"><i class="fas fa-eye"></i></a>
-                                    <button  class="btn btn-danger remove" id="test" type="submit" value="<?php echo $row['supplier_id']?>/<?php echo $row['time']?>">
+                                    <button  class="btn btn-danger remove" id="<?php echo $row['id']?>" type="submit" value="<?php echo $row['supplier_id']?>/<?php echo $row['time']?>">
                                     <i class="fas fa-trash"></i> </button>
                                 </td>
                             </tr>
@@ -75,7 +75,7 @@
 
 $(".remove").click(function(){
 
-    var id = document.getElementById("test").value;;
+var id = $(this).val();
 
 console.log(id);
 
