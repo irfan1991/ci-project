@@ -1,8 +1,8 @@
 <?php
-$supplier = isset($input) ? $input[0]['supplier_name'] : "";
-$time = isset($input) ? str_replace('`', '',$input[0]['waktu']) : "";
+$customer = isset($output) ? $output[0]['customer_name'] : "";
+$time = isset($output) ? str_replace('`', '',$output[0]['waktu']) : "";
 $v = isset($v) ? "readonly" : "";
-$btn = isset($input) ? "Ubah" : "Simpan";
+$btn = isset($output) ? "Ubah" : "Simpan";
 ?>
 <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
@@ -10,7 +10,7 @@ $btn = isset($input) ? "Ubah" : "Simpan";
             <h1 class="h3 mb-0 text-gray-800">Transaction</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="<?php echo base_url('/hello'); ?>">Dashboard</a></li>
-              <li class="breadcrumb-item">Input</li>
+              <li class="breadcrumb-item">Output</li>
               <li class="breadcrumb-item active" aria-current="page"><?php echo $arr; ?></li>
             </ol>
           </div>
@@ -33,20 +33,20 @@ $btn = isset($input) ? "Ubah" : "Simpan";
                     </div>
 
                   <div class="form-group">
-                    <label for="select2Single">Suppliers</label>
+                    <label for="select2Single">Customer</label>
                     <?php if ($v == "") { ?>
 
-                      <select class="select2-single form-control"  name="supplier_id" id="select2Single"  
+                      <select class="select2-single form-control"  name="customer_id" id="select2Single"  
                       <?php echo $v; ?> required style="width:100%">
-                        <option value="" selected>Choose Supplier</option>
-                          <?php  foreach ($suppliers as $row) { ?>
-                            <option value="<?php echo $row["id"] ?>"><?php echo $row["supplier_name"];  ?></option>
+                        <option value="" selected>Choose Customer</option>
+                          <?php  foreach ($customers as $row) { ?>
+                            <option value="<?php echo $row["id"] ?>"><?php echo $row["customer_name"];  ?></option>
                           <?php }?>
                       </select>
 
                         <?php } else {?>
 
-                      <p><?php echo $supplier; ?></p>
+                      <p><?php echo $customer; ?></p>
                       
                     <?php } ?>
                   </div>
@@ -75,7 +75,7 @@ $btn = isset($input) ? "Ubah" : "Simpan";
                               
                               <?php 
                                 $no = 1;
-                                foreach ($input as $row) { ?>
+                                foreach ($output as $row) { ?>
                                     <tr>
                                         <td><?php echo $no++ ?></td>
                                         <td><?php echo $row['product_name']?></td>
@@ -108,7 +108,7 @@ $btn = isset($input) ? "Ubah" : "Simpan";
                     <?php if ($v == "") { ?>
                       <button type="submit" class="btn btn-primary" ><?php echo $btn; ?></button>
                     <?php }?>
-                    <a href="/input" class="btn btn-primary" >Kembali</a>
+                    <a href="/output" class="btn btn-primary" >Kembali</a>
                   </form>
                 </div>
               </div>
@@ -119,11 +119,11 @@ $btn = isset($input) ? "Ubah" : "Simpan";
           <?php if ($v === "") { ?>
 
                 var products= <?= json_encode($products);?>;
-             
+              
               function tambah()
                       {
 
-                        
+                        console.log(products);
                         var tbl = $('#databrg');
                         var lastRow = tbl.find("tr").length;
                         var idlast = lastRow -1;

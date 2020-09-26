@@ -1,3 +1,0 @@
-delimiter // 
- CREATE TRIGGER update_stok AFTER INSERT ON inputs FOR EACH ROW BEGIN UPDATE product SET product_stock=product_stock + NEW.amount WHERE product_id=NEW.product_id;end;//
- delimiter ;

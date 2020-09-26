@@ -40,6 +40,7 @@ class Outputs extends Migration
 		$this->forge->dropTable('outputs',TRUE);
 		// $this->forge->addForeignKey('product_id','product','product_id','CASCADE','CASCADE');
 		// $this->forge->addForeignKey('customer_id','customers','id','CASCADE','CASCADE');
+		$this->forge->addKey('id', TRUE);
 		$this->forge->createTable('outputs');
 	}
 

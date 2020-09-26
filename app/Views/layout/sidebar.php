@@ -27,8 +27,8 @@
         <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">User Management</h6>
-            <a class="collapse-item" href="alerts.html">Users</a>
-            <a class="collapse-item" href="buttons.html">Roles</a>
+            <a class="collapse-item" href="<?php echo base_url('user'); ?>">Users</a>
+            <a class="collapse-item" href="<?php echo base_url('user/role'); ?>">Roles</a>
          
           </div>
         </div>

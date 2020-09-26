@@ -187,3 +187,6 @@
           <!--Row-->
 
         
+
+  <script src="<?php echo base_url().'/template/vendor/chart.js/Chart.min.js' ?>"></script>
+  <script src="<?php echo base_url().'/template/js/demo/chart-area-demo.js '?>"></script>

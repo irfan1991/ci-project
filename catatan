@@ -1,0 +1,10 @@
+
+delimiter // 
+CREATE TRIGGER update_stok AFTER INSERT ON inputs FOR EACH ROW BEGIN UPDATE product SET product_stock=product_stock + NEW.amount WHERE product_id=NEW.product_id;end;//
+delimiter ;
+
+delimiter //
+CREATE TRIGGER min_stok AFTER INSERT ON outputs FOR EACH ROW BEGIN UPDATE product SET product_stock=product_stock - NEW.amount WHERE product_id=NEW.product_id;end;//
+delimiter ;
+
+kalaU mau migrate drop dulu db create ulang

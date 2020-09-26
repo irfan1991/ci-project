@@ -3,7 +3,7 @@ namespace App\Database\Seeds;
 use CodeIgniter\Database\Seeder;
 use CodeIgniter\I18n\Time;
 
-class InputSeeder extends Seeder
+class OutputSeeder extends Seeder
 {
     
     
@@ -13,7 +13,7 @@ class InputSeeder extends Seeder
 
         $data1 = [
             'product_id' => 1,
-            'supplier_id' => 1,
+            'customer_id' => 1,
             'amount' =>  12,
             'time' => $myTime,
             'createdBy' => 'Irfan',
@@ -21,7 +21,7 @@ class InputSeeder extends Seeder
 
      
 
-        $this->db->table('inputs')->insert($data1);
+        $this->db->table('outputs')->insert($data1);
     }
 }
 

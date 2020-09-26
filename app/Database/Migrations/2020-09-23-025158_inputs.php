@@ -37,9 +37,11 @@ class Inputs extends Migration
 			]
 			
 		]);
+
 		$this->forge->dropTable('inputs',TRUE);
 		// $this->forge->addForeignKey('product_id','product','product_id','CASCADE','CASCADE');
 		// $this->forge->addForeignKey('supplier_id','suppliers','id','CASCADE','CASCADE');
+		$this->forge->addKey('id', TRUE);
 		$this->forge->createTable('inputs');
 	}
 

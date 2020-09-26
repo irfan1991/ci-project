@@ -8,8 +8,9 @@ class Users extends Migration
 	{
 		$this->forge->addField([
 			'id' => [
-				'type' => 'INT',
-				'constraint' => 11,
+				'type' => 'BIGINT',
+				'constraint' => 20,
+				'unsigned' => TRUE,
 				'auto_increment' => TRUE
 			],
 			'first_name' => [
@@ -31,7 +32,7 @@ class Users extends Migration
 		]);
 		
 		
-	
+		$this->forge->dropTable('users',TRUE);
 		$this->forge->addKey('id');
 		$this->forge->createTable('users');
 	}

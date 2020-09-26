@@ -59,8 +59,6 @@
   <script src="<?php echo base_url().'/template/vendor/bootstrap/js/bootstrap.bundle.min.js'?>"></script>
   <script src="<?php echo base_url().'/template/vendor/jquery-easing/jquery.easing.min.js' ?>"></script>
   <script src="<?php echo base_url().'/template/js/ruang-admin.min.js' ?>"></script>
-  <script src="<?php echo base_url().'/template/vendor/chart.js/Chart.min.js' ?>"></script>
-  <script src="<?php echo base_url().'/template/js/demo/chart-area-demo.js '?>"></script>
   <script src="<?php echo base_url().'/template/vendor/toast/js/toastr.min.js ' ?>"></script>  
    <!-- Select2 -->
    <script src="<?php echo base_url().'/template/vendor/select2/dist/js/select2.min.js' ?>"></script>
