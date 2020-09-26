@@ -36,10 +36,10 @@ class Outputs extends Migration
 				'null'   => TRUE,
 			]
 			
-		]);
-
-		$this->forge->addForeignKey('product_id','product','product_id','CASCADE','CASCADE');
-		$this->forge->addForeignKey('customer_id','customers','id','CASCADE','CASCADE');
+		]);	
+		$this->forge->dropTable('outputs',TRUE);
+		// $this->forge->addForeignKey('product_id','product','product_id','CASCADE','CASCADE');
+		// $this->forge->addForeignKey('customer_id','customers','id','CASCADE','CASCADE');
 		$this->forge->createTable('outputs');
 	}
 
@@ -47,6 +47,6 @@ class Outputs extends Migration
 
 	public function down()
 	{
-		//
+		$this->forge->dropTable('outputs',TRUE);
 	}
 }

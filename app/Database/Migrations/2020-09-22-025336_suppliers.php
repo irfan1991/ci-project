@@ -44,7 +44,7 @@ class Suppliers extends Migration
 			],
 
 		]);
-
+		$this->forge->dropTable('suppliers',TRUE);
 		$this->forge->addKey('id', TRUE);
 		$this->forge->createTable('suppliers');
 	}
@@ -53,6 +53,6 @@ class Suppliers extends Migration
 
 	public function down()
 	{
-		//
+		$this->forge->dropTable('suppliers',TRUE);
 	}
 }

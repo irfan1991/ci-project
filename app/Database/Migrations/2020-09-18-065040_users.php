@@ -29,6 +29,9 @@ class Users extends Migration
 				'constraint' => 100,
 			]
 		]);
+		
+		
+	
 		$this->forge->addKey('id');
 		$this->forge->createTable('users');
 	}
@@ -37,6 +40,6 @@ class Users extends Migration
 
 	public function down()
 	{
-		//
+		$this->forge->dropTable('users',TRUE);
 	}
 }

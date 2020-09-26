@@ -27,7 +27,7 @@ class Categories extends Migration
 			],
 
 		]);
-		// $this->forge->dropTable('categories',TRUE);
+		
 		$this->forge->addKey('id', TRUE);
 		$this->forge->createTable('categories');
 	}
@@ -36,6 +36,8 @@ class Categories extends Migration
 
 	public function down()
 	{
-		//
+		
+		$this->forge->dropTable('categories',TRUE);
+	
 	}
 }

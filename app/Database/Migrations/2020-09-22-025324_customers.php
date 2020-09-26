@@ -44,7 +44,7 @@ class Customers extends Migration
 			],
 
 		]);
-
+		$this->forge->dropTable('customers',TRUE);
 		$this->forge->addKey('id', TRUE);
 		$this->forge->createTable('customers');
 	}
@@ -53,6 +53,6 @@ class Customers extends Migration
 
 	public function down()
 	{
-		//
+		$this->forge->dropTable('customers',TRUE);
 	}
 }
