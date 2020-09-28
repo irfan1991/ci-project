@@ -20,9 +20,8 @@ class UsersRole extends Migration
 				
 			],
 			'role_id' => [
-				'type' => 'ENUM',
-				'constraint' => "'Active','Inactive'",
-				'default' => 'Active',
+				'type' => 'INT',
+				'constraint' => 20,
 				
 			],
 

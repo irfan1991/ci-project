@@ -4,9 +4,9 @@ use CodeIgniter\Controller;
 use App\Models\Category_model;
 use Config\Services;
 
-class Category extends Controller
+class User extends Controller
 {
-    protected $modul = "category";
+    protected $modul = "users";
 
     public function index()
     {

@@ -128,22 +128,33 @@ $btn = isset($output) ? "Ubah" : "Simpan";
                         var lastRow = tbl.find("tr").length;
                         var idlast = lastRow -1;
                         var emptyrows = 0;
+                       
                         for (i=idlast; i<lastRow; i++) {
                           if ($("#idbrg"+i).val() == '' || $("#qty"+i).val() == '' ) {
                             emptyrows += 1;
                           }
                         }
+
+                  
+                          
                           
                         if (emptyrows == 0 ) {
                           var opt = '';
+                          var stock = [];
                           $.each(products, function() {
-                            opt += '<option value="' + this.product_id + '">'+this.product_name+'</option>';
+                            opt += '<option value="' + this.product_id + '" id="opt">'+this.product_name+'</option>';
+                          
+                              stock.push(this.product_stock);
                           });		
                           
                           var ddlBrg = '<select name="idbrg[]" id="idbrg'+lastRow+'" class="select2-single form-control idbrg" required>'+opt+'</select>';
-                          var txtJml = '<input type="text" name="qty[]" class="form-control qty" id="qty'+lastRow+'" data-rule-required="true" data-rule-number="true"/>';
+                          var txtJml = '<input type="number" name="qty[]" class="form-control qty" id="qty'+lastRow+'" data-rule-required="true" data-rule-number="true"/>';
                           var trash = '<i class="fas fa-trash" onClick="hapus('+lastRow+')"></i>';
                           tbl.append("<tr id='tr"+lastRow+"'><td>"+ddlBrg+"</td><td align='right'>"+txtJml+"</td><td><center>"+trash+"</center></td></tr>");
+
+                          console.log(stock);
+
+                        
                         } else  {
                             alert("Silahkan mengisi data pada baris yang tersedia terlebih dahulu, sebelum menambah baris");
                         }

@@ -15,9 +15,16 @@ class UserRoleSeeder extends Seeder
             'role_id' => 1
         ];
 
+        $data2 = [
+            'user_id' => 1,
+            'role_id' => 2
+        ];
+
      
 
         $this->db->table('user_role')->insert($data1);
+        $this->db->table('user_role')->insert($data2);
+
     }
 }
 
