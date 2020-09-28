@@ -88,12 +88,15 @@ class Product extends Controller
 
     public function update()
     {
+        
         $model = new Product_model();
         $id = $this->request->getPost('product_id');
         $cek = $model->where('product_id',$id)->first();
        if ($_FILES['photo']['name'] != "") {
           $photo = $this->request->getFile('photo');
-          unlink(ROOTPATH.'public/uploads/'.$cek["photo"]);
+          if ($cek["photo"] != NULL ) {
+            unlink(ROOTPATH.'public/uploads/'.$cek["photo"]);
+        }
           $photo->move(ROOTPATH.'public/uploads');
           $getPhoto = $photo->getName();
        } else {

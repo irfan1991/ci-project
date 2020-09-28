@@ -87,9 +87,10 @@ $btn = isset($product) ? "Ubah" : "Simpan";
                       <div class="custom-file">
 
                       <?php if ($v == "") { ?>
+                        <label class="custom-file-label" for="customFile" id="setFile">Choose file For Product</label>
                         <input type="file" class="custom-file-input" id="customFile" name="photo" onchange="ValidateSingleInput(this);" >
-                        <label class="custom-file-label" for="customFile">Choose file For Product</label>
-                        <p>Types are allowed :jpg/png/jpeg/PNG</p><br />
+                        
+                        <p >Types are allowed :jpg/png/jpeg/PNG</p><br />
                         <?php }?>
 
                         <?php if ($photo !== "") { ?>
@@ -113,9 +114,12 @@ $btn = isset($product) ? "Ubah" : "Simpan";
    <script>
     var _validFileExtentions = [".PNG",".png",".jpg",".jpeg"];
     function ValidateSingleInput(params) {
+      $('#setFile').text(params.value);
         if (params.type == "file") {
             var sFileName = params.value;
             if (sFileName.length > 0) {
+              
+        console.log(params.value);
                 var blnValid = false;
                 for (let index = 0; index < _validFileExtentions.length; index++) {
                     const element = _validFileExtentions[index];
@@ -135,6 +139,8 @@ $btn = isset($product) ? "Ubah" : "Simpan";
                 return false;
             }
         }
+
+        
     }
     </script>
 
