@@ -1,10 +1,10 @@
  <!-- Container Fluid-->
  <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Products</h1>
+            <h1 class="h3 mb-0 text-gray-800">User Management</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="<?php echo base_url('/hello'); ?>">Dashboard</a></li>
-              <li class="breadcrumb-item">Category</li>
+              <li class="breadcrumb-item">User</li>
               <li class="breadcrumb-item active" aria-current="page"><?php echo $arr; ?></li>
             </ol>
           </div>
@@ -49,8 +49,8 @@
                                 <td><?php echo $no++ ?></td>
                                 <td><?php echo $row['first_name']?></td>
                                 <td><?php echo $row['last_name']?></td>
-                                <td><?php echo $row['email']?></td>
-                                <td><?php ?></td>
+                                <td><?php echo $row['email']; ?></td>
+                                <td><?php echo $row['roles']; ?></td>
                                 <td>
           
                                     <a class="btn btn-warning" href="/user/edit/<?php echo $row['id'] ?>"><i class="fas fa-pen"></i></a>
