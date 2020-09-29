@@ -98,10 +98,22 @@ class User extends Controller
     {
         $model = new User_model();
         $id = $this->request->getPost('id');
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+        if ($password != "") {
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        } else {
+            $password_hash = $this->request->getPost('passwordhint');
+        }
+        
+        
         $data = array(
             'first_name' => $this->request->getPost('first_name'),
-            'user_status' => $this->request->getPost('status'),
+            'last_name' => $this->request->getPost('last_name'),
+            'email' => $email,
+            'password' => $password_hash,
         );
+
         $model->updateUser($data,$id);
         session()->setFlashData('success', 'Data is updated successfully!');
         return redirect()->to('/user');

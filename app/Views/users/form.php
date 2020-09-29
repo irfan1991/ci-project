@@ -29,6 +29,7 @@ $btn = isset($user) ? "Ubah" : "Simpan";
                 <div class="card-body">
                   <form action="<?php echo site_url($urlmethod) ?>" method="post"  enctype="multipart/form-data">
                   <input type="hidden" name="id" value="<?php echo $id; ?>">  
+                  <input type="hidden" name="passwordhint" value="<?php echo $password; ?>"> 
                   
                   <div class="form-group">
                       <label for="first_name">First Name</label>
@@ -50,6 +51,14 @@ $btn = isset($user) ? "Ubah" : "Simpan";
                         placeholder="Enter Email" value="<?php echo $email?>" <?php echo $v; ?> required>
                       <small id="email" class="form-text text-muted">Input email properly.</small>
                     </div>
+
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" name="password" aria-describedby="password"
+                        placeholder="Enter Password"  <?php echo $v; ?> required>
+                      <small id="password" class="form-text text-muted">Input password properly.</small>
+                    </div>
+
 
                     <div class="form-group">
                     <label for="select2Multiple">Role Akses</label>

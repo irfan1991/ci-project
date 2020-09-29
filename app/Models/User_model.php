@@ -12,13 +12,14 @@ class User_model extends Model {
             ->select(' a.* ,  group_concat(b.name) AS roles')
             ->join('user_role c','a.id=c.user_id','left')
             ->join('roles b','c.role_id=b.id','left')
+            ->groupBy(["a.id",])
             ->get()->getResultArray();
         } else {
             return $this->db->table($this->table." a ")
             ->select(' a.* ,  group_concat(b.name) AS roles')
             ->join('user_role c','a.id=c.user_id','left')
             ->join('roles b','c.role_id=b.id','left')
-            ->getWhere(['id' => $id]);
+            ->getWhere(['a.id' => $id]);
         }
         
     }
