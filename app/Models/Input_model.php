@@ -32,6 +32,22 @@ class Input_model extends Model {
         $query = $this->db->table($this->table)->delete(array('supplier_id' => $id, 'time' => $time));
         return $query;
     }
+
+    public function amount()
+    {
+        return $this->db->table($this->table)
+            ->select('SUM(amount) AS amount ')->groupBy('DATE_FORMAT(time,"%M")')->orderBy('time','ASC')->get()->getResultArray();
+
+    }
+
+    public function month()
+    {
+        return $this->db->table($this->table)
+            ->select('DATE_FORMAT(time,"%M") as month')
+            ->groupBy(['DATE_FORMAT(time,"%M")'])
+            ->orderBy('time')
+            ->get()->getResultArray();
+    }
 }
 
 
