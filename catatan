@@ -12,3 +12,6 @@ delimiter ;
 kalaU mau migrate drop dulu db create ulang  
  php spark migrate
  php spark db:sheet TestSeeder
+
+ //buat excel
+ composer require phpoffice/phpspreadsheet

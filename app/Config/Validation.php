@@ -138,4 +138,16 @@ class Validation
 			'required' => 'Data country wajib diisi.'
 		],
 	];
+
+	public $import = [
+		'trx_file'         => 'uploaded[trx_file]|ext_in[trx_file,xls,xlsx]|max_size[trx_file,1000]',
+	];
+	 
+	public $import_errors = [
+		'trx_file'=> [
+			'ext_in'    => 'File Excel hanya boleh diisi dengan xls atau xlsx.',
+			'max_size'  => 'File Excel product maksimal 1mb',
+			'uploaded'  => 'File Excel product wajib diisi'
+		]
+	];
 }
