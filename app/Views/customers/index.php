@@ -16,9 +16,13 @@
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary"><?php echo $title; ?></h6>
-                  <a href="/customer/add" class="btn btn-info pull-right"> Add Data</a>
-                  <a href="<?php echo base_url('customer/import'); ?>" class="btn btn-primary pull-right">Import</a>
-                  <a href="<?php echo base_url('customer/export'); ?>" class="btn btn-success pull-right">Export</a>
+                  <div class="pull-right">
+                      <a href="/customer/add" class="btn btn-info"> Add Data</a>
+                      <a href="<?php echo base_url('customer/import'); ?>" class="btn btn-primary">Import</a>
+                      <a href="<?php echo base_url('customer/export'); ?>" class="btn btn-success">Export</a>
+                  </div>
+                  
+                  
                 </div>
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
